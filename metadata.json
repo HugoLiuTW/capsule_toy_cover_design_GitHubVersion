@@ -1,0 +1,7 @@
+{
+  "name": "capsule_toy_cover_design",
+  "description": "A high-end poster generation tool for gacha products using Gemini 3 and 2.5 models. Supports cross-demographic adaptation and material consistency.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

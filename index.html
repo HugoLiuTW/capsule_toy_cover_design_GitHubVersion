@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Pro - 扭蛋海報生成器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --night-sky: #0A0E27;
+            --aurora-cyan: #00F5FF;
+            --aurora-purple: #7B2FF7;
+            --aurora-green: #00FF88;
+            --aurora-gradient: linear-gradient(135deg, var(--aurora-cyan) 0%, var(--aurora-purple) 100%);
+        }
+        html {
+            /* 全域字級放大 2%：Tailwind 預設使用 rem 單位，調整根節點大小可實現全站同步縮放 */
+            font-size: 102%;
+        }
+        body { 
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: var(--night-sky);
+            color: #E2E8F0;
+            overflow-x: hidden;
+            letter-spacing: 0.02em;
+        }
+        .font-heiti { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            font-weight: 900;
+            letter-spacing: 0.05em;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 245, 255, 0.15);
+            border-radius: 24px;
+        }
+        .glow-md {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.15), 0 0 60px rgba(123, 47, 247, 0.1);
+        }
+        .aurora-btn {
+            background: var(--aurora-gradient);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+        }
+        .aurora-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+        .text-aurora {
+            background: var(--aurora-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+        }
+        /* Animated Background Elements */
+        .aurora-blur {
+            position: fixed;
+            z-index: -1;
+            filter: blur(120px);
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: floating 15s infinite ease-in-out;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(10vw, 5vh) scale(1.1); }
+            66% { transform: translate(-5vw, 15vh) scale(0.9); }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--night-sky); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 245, 255, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--aurora-cyan); }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+  }
+}
+</script>
+</head>
+<body>
+    <div class="aurora-blur bg-[#00F5FF] w-[40vw] h-[40vw] top-[-10%] left-[-10%]"></div>
+    <div class="aurora-blur bg-[#7B2FF7] w-[35vw] h-[35vw] bottom-[-5%] right-[-5%] animation-delay-[-5s]"></div>
+    <div class="aurora-blur bg-[#00FF88] w-[30vw] h-[30vw] top-[30%] right-[10%] animation-delay-[-10s] opacity-20"></div>
+    <div id="root"></div>
+</body>
+</html>
